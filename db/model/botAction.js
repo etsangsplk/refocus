@@ -31,6 +31,17 @@ module.exports = function user(seq, dataTypes) {
       allowNull: false,
       comment: 'Value for all room type settings'
     }
+  }, {
+    classMethods: {
+      getBotActionAssociations() {
+        return assoc;
+      },
+      postImport(models) {
+        assoc.bot = BotAction.belongsTo(models.Bot, {
+          foreignKey: 'botId',
+        });
+      },
+    }
   });
   return BotAction;
 };

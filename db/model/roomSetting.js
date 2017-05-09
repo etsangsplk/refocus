@@ -28,6 +28,17 @@ module.exports = function user(seq, dataTypes) {
       unique: false,
       comment: 'Value for all room type settings'
     }
+  }, {
+    classMethods: {
+      getRoomSettingAssociations() {
+        return assoc;
+      },
+      postImport(models) {
+        assoc.room = RoomSetting.belongsTo(models.RoomType, {
+          foreignKey: 'roomTypeId',
+        });
+      },
+    }
   });
   return RoomSetting;
 };

@@ -22,6 +22,17 @@ module.exports = function user(seq, dataTypes) {
       unique: true,
       comment: 'The criteria for a rule in a Lisps S-expressions JSON logic'
     }
+  }, {
+    classMethods: {
+      getRoomRuleAssociations() {
+        return assoc;
+      },
+      postImport(models) {
+        assoc.room = RoomRule.belongsTo(models.RoomType, {
+          foreignKey: 'roomTypeId',
+        });
+      },
+    }
   });
   return RoomRule;
 };

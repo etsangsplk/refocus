@@ -51,6 +51,11 @@ module.exports = function user(seq, dataTypes) {
             as: 'datas',
             foreignKey: 'botId',
           });
+          assoc.writers = Bot.belongsToMany(models.User, {
+            as: 'writers',
+            through: 'BotWriters',
+            foreignKey: 'botId',
+          });
         },
       }
   });

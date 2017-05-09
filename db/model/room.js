@@ -33,8 +33,13 @@ module.exports = function user(seq, dataTypes) {
         return assoc;
       },
       postImport(models) {
-        assoc.type = Room.belongsTo(models.RoomTypes, {
+        assoc.type = Room.belongsTo(models.RoomType, {
           foreignKey: 'type',
+        });
+        assoc.writers = Room.belongsToMany(models.User, {
+          as: 'writers',
+          through: 'RoomWriters',
+          foreignKey: 'roomId',
         });
       },
     }

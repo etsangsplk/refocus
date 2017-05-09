@@ -25,6 +25,17 @@ module.exports = function user(seq, dataTypes) {
       type: dataTypes.ENUM('BOOLEAN', 'INTERGER', 'DECIMAL', 'ARRAY', 'STRING'),
       defaultValue: 'BOOLEAN',
     }
+  }, {
+    classMethods: {
+      getBotDataAssociations() {
+        return assoc;
+      },
+      postImport(models) {
+        assoc.bot = BotData.belongsTo(models.Bot, {
+          foreignKey: 'botId',
+        });
+      },
+    }
   });
   return BotData;
 };
