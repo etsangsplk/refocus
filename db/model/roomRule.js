@@ -17,7 +17,7 @@ const assoc = {};
 module.exports = function user(seq, dataTypes) {
   const RoomRule = seq.define('RoomRule', {
     criteria: {
-      type: dataTypes.STRING,
+      type: dataTypes.JSON,
       allowNull: false,
       unique: true,
       comment: 'The criteria for a rule in a Lisps S-expressions JSON logic'

@@ -7,7 +7,7 @@
  */
 
 /**
- * db/model/roBotom.js
+ * db/model/bot.js
  */
 const common = require('../helpers/common');
 const constants = require('../constants');
