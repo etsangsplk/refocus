@@ -54,4 +54,3 @@ module.exports = function user(seq, dataTypes) {
   return BotData;
 };
 
-

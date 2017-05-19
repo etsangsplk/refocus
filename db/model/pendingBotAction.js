@@ -55,4 +55,3 @@ module.exports = function user(seq, dataTypes) {
   return PendingBotAction;
 };
 
-

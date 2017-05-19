@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, salesforce.com, inc.
+ * Copyright (c) 2017, salesforce.com, inc.
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or
@@ -38,10 +38,10 @@ module.exports = function user(seq, dataTypes) {
       defaultValue: false,
       comment: 'Determines if an pending action is completed',
     },
-    name: {
+    dataValue: {
       type: dataTypes.STRING,
       allowNull: true,
-      comment: 'Name of action or data updated',
+      comment: 'Value of data to update',
     },
   }, {
     classMethods: {
@@ -73,5 +73,4 @@ module.exports = function user(seq, dataTypes) {
   });
   return RoomEvent;
 };
-
 
