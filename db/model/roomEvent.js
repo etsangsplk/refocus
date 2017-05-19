@@ -7,23 +7,31 @@
  */
 
 /**
- * db/model/roomLog.js
+ * db/model/roomEvent.js
+ *
+ * Room Events are how bots are supposed to interact with rooms
+ * each room event type along with
  */
-const common = require('../helpers/common');
-const constants = require('../constants');
 
 const assoc = {};
 
 module.exports = function user(seq, dataTypes) {
   const RoomEvent = seq.define('RoomEvent', {
+    id: {
+      type: dataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     log: {
       type: dataTypes.STRING,
       allowNull: false,
       comment: 'Readable log line',
     },
     type: {
-      type: dataTypes.ENUM('ACTION', 'DATAUPDATE', 'DATACREATE', 'CONNECT', 'REFRESH'),
-      defaultValue: 'CONNECT',
+      type:
+        dataTypes.ENUM('LOGGING', 'ACTION', 'DATAUPDATE', 'CONNECT', 'REFRESH'),
+      defaultValue: 'LOGGING',
+      comment: 'Type of event',
     },
     pendingAction: {
       type: dataTypes.BOOLEAN,
@@ -62,5 +70,8 @@ module.exports = function user(seq, dataTypes) {
         });
       },
     },
-  });  return RoomEvent;
+  });
+  return RoomEvent;
 };
+
+

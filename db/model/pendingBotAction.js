@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, salesforce.com, inc.
+ * Copyright (c) 2017, salesforce.com, inc.
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or
@@ -8,23 +8,30 @@
 
 /**
  * db/model/pendingBotAction.js
+ *
+ * Once an action is intiated from refocus bots need to be able to
+ * check if they have any actions to perform. This table will act
+ * as an action queue for bots.
  */
-const common = require('../helpers/common');
-const constants = require('../constants');
 
 const assoc = {};
 
 module.exports = function user(seq, dataTypes) {
   const PendingBotAction = seq.define('PendingBotAction', {
+    id: {
+      type: dataTypes.UUID,
+      primaryKey: true,
+      defaultValue: dataTypes.UUIDV4,
+    },
     pending: {
       type: dataTypes.BOOLEAN,
       defaultValue: true,
       comment: 'Determines if bot is still active',
     },
     parameters: {
-      type: dataTypes.STRING,
-      allowNull: false,
-      comment: 'Name of bot action',
+      type: dataTypes.ARRAY(dataTypes.STRING),
+      allowNull: true,
+      comment: 'List of parameters needed to run bot action',
     },
   }, {
     classMethods: {
@@ -47,3 +54,5 @@ module.exports = function user(seq, dataTypes) {
   });
   return PendingBotAction;
 };
+
+

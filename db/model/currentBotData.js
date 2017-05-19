@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, salesforce.com, inc.
+ * Copyright (c) 2017, salesforce.com, inc.
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or
@@ -8,17 +8,24 @@
 
 /**
  * db/model/currentBotData.js
+ *
+ * During a room session bots data will need to be localized
+ * so that it can be retrieved quickly in room rule checks.
+ * This table will hold the current value for bot data.
  */
-const common = require('../helpers/common');
-const constants = require('../constants');
 
 const assoc = {};
 
 module.exports = function user(seq, dataTypes) {
   const CurrentBotData = seq.define('CurrentBotData', {
+    id: {
+      type: dataTypes.UUID,
+      primaryKey: true,
+      defaultValue: dataTypes.UUIDV4,
+    },
     value: {
       type: dataTypes.STRING,
-      comment: 'Current Value for bot data',
+      comment: 'Current value for bot data',
     },
   }, {
     classMethods: {
@@ -38,3 +45,4 @@ module.exports = function user(seq, dataTypes) {
   });
   return CurrentBotData;
 };
+

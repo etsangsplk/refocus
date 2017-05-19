@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, salesforce.com, inc.
+ * Copyright (c) 2017, salesforce.com, inc.
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or
@@ -8,8 +8,12 @@
 
 /**
  * db/model/bot.js
+ *
+ * Bots are distributed webapps that will interact with our
+ * different routes. This object will be used to track
+ * and organize the bots that are associated with refocus.
  */
-const common = require('../helpers/common');
+
 const constants = require('../constants');
 
 const assoc = {};
@@ -20,11 +24,16 @@ module.exports = function user(seq, dataTypes) {
       type: dataTypes.STRING,
       allowNull: false,
       unique: true,
+      primaryKey: true,
+      validate: {
+        is: constants.nameRegex,
+      },
       comment: 'Create a named bot',
     },
     location: {
       type: dataTypes.STRING,
       allowNull: false,
+      validate: { isUrl: true },
       comment: 'The URL to load UI from',
     },
     active: {
@@ -62,3 +71,5 @@ module.exports = function user(seq, dataTypes) {
   });
   return Bot;
 };
+
+
