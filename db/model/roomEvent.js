@@ -70,6 +70,21 @@ module.exports = function user(seq, dataTypes) {
         });
       },
     },
+    hooks: {
+
+      /**
+       * When a publihsed aspect is deleted. Delete its entry in the aspectStore
+       * and the sampleStore if any.
+       *
+       * @param {Aspect} inst - The deleted instance
+       */
+      afterCreate(inst /* , opts */) {
+        if (inst.getDataValue('dataValue')) {
+          const test = { log: 'test' };
+          seq.models.RoomEvent.create(test);
+        }
+      }, // hooks.afterCreate
+    },
   });
   return RoomEvent;
 };

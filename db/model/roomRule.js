@@ -23,9 +23,6 @@ module.exports = function user(seq, dataTypes) {
       type: dataTypes.JSON,
       allowNull: false,
       unique: true,
-      validate: {
-        logic: u.validateJSONCriteria,
-      },
       comment: 'The criteria for a rule in a JSON logic',
     },
   }, {
